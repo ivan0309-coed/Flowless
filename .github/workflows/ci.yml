@@ -1,0 +1,39 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: flowless_test
+          POSTGRES_USER: flowless
+          POSTGRES_PASSWORD: flowless
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U flowless -d flowless_test"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      CI: true
+      DATABASE_URL: postgres://flowless:flowless@localhost:5432/flowless_test
+      SESSION_SECRET: ci-session-secret-with-at-least-32-characters
+      DEMO_ADMIN_PASSWORD: FlowlessAdmin123!
+      DEMO_USER_PASSWORD: FlowlessDemo123!
+      RUN_INTEGRATION: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:migrate
+      - run: pnpm db:seed
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e

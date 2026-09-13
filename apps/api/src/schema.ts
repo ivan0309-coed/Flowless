@@ -1,0 +1,9 @@
+import { boolean, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+
+export const departments = pgTable("departments", { id: uuid().primaryKey(), code: text().notNull().unique(), name: text().notNull() });
+export const users = pgTable("users", { id: uuid().primaryKey(), email: text().notNull().unique(), name: text().notNull(), passwordHash: text("password_hash").notNull(), departmentId: uuid("department_id"), position: text().notNull(), managerId: uuid("manager_id"), active: boolean().notNull(), isAdmin: boolean("is_admin").notNull() });
+export const policies = pgTable("policies", { id: uuid().primaryKey(), code: text().notNull().unique() });
+export const policyVersions = pgTable("policy_versions", { id: uuid().primaryKey(), policyId: uuid("policy_id").notNull(), version: integer().notNull(), title: text().notNull(), body: text().notNull(), rules: jsonb().notNull(), status: text().notNull(), publishedAt: timestamp("published_at", { withTimezone: true }) });
+export const requests = pgTable("requests", { id: uuid().primaryKey(), revision: integer().notNull(), requesterId: uuid("requester_id").notNull(), description: text().notNull(), context: jsonb(), status: text().notNull(), plan: jsonb(), validation: jsonb(), contextHash: text("context_hash") });
+export const approvalSteps = pgTable("approval_steps", { id: uuid().primaryKey(), requestId: uuid("request_id").notNull(), requestRevision: integer("request_revision").notNull(), stepOrder: integer("step_order").notNull(), selector: jsonb().notNull(), assigneeId: uuid("assignee_id").notNull(), status: text().notNull() });
+export const auditEvents = pgTable("audit_events", { requestId: uuid("request_id"), requestRevision: integer("request_revision"), actorId: uuid("actor_id"), eventType: text("event_type").notNull(), details: jsonb().notNull() });

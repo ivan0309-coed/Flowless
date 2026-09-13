@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17-alpine
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB: flowless
+      POSTGRES_USER: flowless
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run ./scripts/bootstrap.sh first}
+    volumes:
+      - flowless-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowless -d flowless"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: postgres://flowless:${POSTGRES_PASSWORD}@db:5432/flowless
+      PORT: 3000
+      HOST: 0.0.0.0
+      APP_ORIGIN: http://localhost:3000
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Shanghai}
+      SESSION_SECRET: ${SESSION_SECRET:?Run ./scripts/bootstrap.sh first}
+      COOKIE_SECURE: "false"
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_OUTPUT_MODE: ${OPENAI_OUTPUT_MODE:-json_schema}
+      DEMO_ADMIN_PASSWORD: ${DEMO_ADMIN_PASSWORD}
+      DEMO_USER_PASSWORD: ${DEMO_USER_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+volumes:
+  flowless-data:

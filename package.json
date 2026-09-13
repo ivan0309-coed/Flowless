@@ -1,0 +1,24 @@
+{
+  "name": "flowless",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.15.1",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @flowless/contracts build && pnpm --filter @flowless/core build && pnpm --parallel --filter @flowless/api --filter @flowless/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @flowless/contracts build && pnpm --filter @flowless/core build && pnpm -r test",
+    "test:e2e": "playwright test",
+    "db:migrate": "pnpm --filter @flowless/api db:migrate",
+    "db:seed": "pnpm --filter @flowless/api db:seed",
+    "start": "pnpm --filter @flowless/api start"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  }
+}

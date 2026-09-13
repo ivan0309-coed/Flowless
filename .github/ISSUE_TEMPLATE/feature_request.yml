@@ -1,0 +1,11 @@
+name: Feature request
+description: Propose a focused approval or decision capability
+body:
+  - type: textarea
+    id: event
+    attributes: { label: Business event, description: Describe what happened and which decision is needed. }
+    validations: { required: true }
+  - type: textarea
+    id: policy
+    attributes: { label: Policy and expected decision path }
+    validations: { required: true }
