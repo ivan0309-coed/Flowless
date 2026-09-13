@@ -10,8 +10,8 @@
       "onAutoForward": "openPreview"
     }
   },
-  "postCreateCommand": "CI=true pnpm install --frozen-lockfile && pnpm db:migrate && pnpm db:seed && pnpm build",
-  "postStartCommand": "nohup pnpm start > /tmp/flowless.log 2>&1 &",
+  "postCreateCommand": "CI=true pnpm install --frozen-lockfile && pnpm db:migrate && pnpm db:seed && pnpm build && ./scripts/start-codespace.sh",
+  "postStartCommand": "./scripts/start-codespace.sh",
   "customizations": {
     "vscode": {
       "extensions": ["dbaeumer.vscode-eslint"]
