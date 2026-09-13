@@ -32,7 +32,7 @@ Add `OPENAI_API_KEY` to the generated `.env`, then start Flowless:
 docker compose up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The bootstrap command prints the randomly generated demo passwords. Use `requester@flowless.local` to create a request, then sign in as each assignee shown in the generated path.
+Open [http://localhost:3000](http://localhost:3000). Every Demo account initially uses `123456`. Use `requester@flowless.local` to create a request, then sign in as each assignee shown in the generated path.
 
 Try these events:
 

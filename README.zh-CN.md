@@ -32,7 +32,7 @@ LLM 没有放行权。只有已确认事实通过确定性校验，并由当前�
 docker compose up --build
 ```
 
-打开 [http://localhost:3000](http://localhost:3000)。初始化脚本会输出随机生成的 Demo 密码。先以 `requester@flowless.local` 发起事项，再按照系统生成的审批路径切换到相应角色账号。
+打开 [http://localhost:3000](http://localhost:3000)。所有 Demo 账号的初始密码都是 `123456`。先以 `requester@flowless.local` 发起事项，再按照系统生成的审批路径切换到相应角色账号。
 
 可以直接体验：
 

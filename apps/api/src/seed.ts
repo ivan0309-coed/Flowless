@@ -70,8 +70,8 @@ const policies = [
   },
 ] as const;
 
-const adminPassword = process.env.DEMO_ADMIN_PASSWORD ?? "FlowlessAdmin123!";
-const userPassword = process.env.DEMO_USER_PASSWORD ?? "FlowlessDemo123!";
+const adminPassword = process.env.DEMO_ADMIN_PASSWORD ?? "123456";
+const userPassword = process.env.DEMO_USER_PASSWORD ?? "123456";
 
 await transaction(async (client) => {
   for (const [id, code, name] of [

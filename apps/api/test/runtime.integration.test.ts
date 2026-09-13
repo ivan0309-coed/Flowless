@@ -11,7 +11,7 @@ integration("PostgreSQL approval runtime", () => {
   afterAll(async () => { await app.close(); await pool.end(); });
 
   async function login(email: string) {
-    const password = email === "admin@flowless.local" ? process.env.DEMO_ADMIN_PASSWORD ?? "FlowlessAdmin123!" : process.env.DEMO_USER_PASSWORD ?? "FlowlessDemo123!";
+    const password = email === "admin@flowless.local" ? process.env.DEMO_ADMIN_PASSWORD ?? "123456" : process.env.DEMO_USER_PASSWORD ?? "123456";
     const response = await app.inject({ method: "POST", url: "/api/v1/auth/login", payload: { email, password } });
     expect(response.statusCode).toBe(200);
     return response.headers["set-cookie"]!.split(";")[0]!;

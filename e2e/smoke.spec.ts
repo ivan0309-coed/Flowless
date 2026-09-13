@@ -3,8 +3,7 @@ import { expect, test } from "@playwright/test";
 test("a demo user can inspect the core Flowless workspace", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "进入 Demo 环境" })).toBeVisible();
-  await expect(page.getByLabel("密码")).toHaveValue("");
-  await page.getByLabel("密码").fill(process.env.DEMO_USER_PASSWORD ?? "FlowlessDemo123!");
+  await expect(page.getByLabel("密码")).toHaveValue("123456");
   await page.getByRole("button", { name: "登录 Flowless" }).click();
 
   await expect(page.getByRole("heading", { name: "发生了什么事情？" })).toBeVisible();

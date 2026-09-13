@@ -20,8 +20,8 @@ jobs:
       CI: true
       DATABASE_URL: postgres://flowless:flowless@localhost:5432/flowless_test
       SESSION_SECRET: ci-session-secret-with-at-least-32-characters
-      DEMO_ADMIN_PASSWORD: FlowlessAdmin123!
-      DEMO_USER_PASSWORD: FlowlessDemo123!
+      DEMO_ADMIN_PASSWORD: "123456"
+      DEMO_USER_PASSWORD: "123456"
       RUN_INTEGRATION: 1
     steps:
       - uses: actions/checkout@v4
