@@ -2,9 +2,13 @@
 
 **开源 AI 原生动态审批与决策引擎。**
 
+[![在 GitHub Codespaces 中打开](https://github.com/codespaces/badge.svg)](https://codespaces.new/ivan0309-coed/Flowless?quickstart=1)
+
 Flowless 面向业务系统和 AI Agent 回答一个统一问题：**当前动作是否允许继续、需要谁审批、为什么？** 它将自然语言或结构化业务事件转换为有制度依据、经过确定性校验、由真实人员审批并可完整审计的 Decision。
 
 [English](README.md) · [架构](docs/architecture.md) · [API](docs/api.md) · [安全说明](SECURITY.md)
+
+仓库内置 GitHub Codespaces 配置，可通过上方按钮直接在 GitHub 中运行完整 Demo，说明见 [GitHub Demo](docs/github-demo.md)。
 
 ## v0.1 已实现
 

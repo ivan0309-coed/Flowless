@@ -2,9 +2,13 @@
 
 **Open-source AI-native approval and decision engine.**
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ivan0309-coed/Flowless?quickstart=1)
+
 Flowless answers a narrow but important question for business systems and AI agents: **may this action continue, who must approve it, and why?** It turns a natural-language or structured business event into a policy-backed, deterministically validated, human-approved decision with a complete audit trail.
 
 [中文文档](README.zh-CN.md) · [Architecture](docs/architecture.md) · [API](docs/api.md) · [Security](SECURITY.md)
+
+The repository includes a GitHub Codespaces configuration for running the complete demo in GitHub. Use the badge above or see [GitHub Demo](docs/github-demo.md).
 
 ## What works in v0.1
 

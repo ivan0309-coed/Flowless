@@ -1,0 +1,40 @@
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces/Flowless:cached
+    environment:
+      DATABASE_URL: postgres://flowless:flowless@db:5432/flowless
+      PORT: 3000
+      HOST: 0.0.0.0
+      APP_ORIGIN: http://localhost:3000
+      APP_TIMEZONE: Asia/Shanghai
+      SESSION_SECRET: codespaces-demo-session-secret-change-for-production
+      COOKIE_SECURE: "false"
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_OUTPUT_MODE: ${OPENAI_OUTPUT_MODE:-json_schema}
+      DEMO_ADMIN_PASSWORD: "123456"
+      DEMO_USER_PASSWORD: "123456"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: flowless
+      POSTGRES_USER: flowless
+      POSTGRES_PASSWORD: flowless
+    volumes:
+      - flowless-codespaces-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowless -d flowless"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  flowless-codespaces-data:
