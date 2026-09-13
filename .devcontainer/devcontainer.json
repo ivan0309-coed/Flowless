@@ -10,7 +10,7 @@
       "onAutoForward": "openPreview"
     }
   },
-  "postCreateCommand": "corepack enable && pnpm install --frozen-lockfile && pnpm db:migrate && pnpm db:seed && pnpm build",
+  "postCreateCommand": "CI=true pnpm install --frozen-lockfile && pnpm db:migrate && pnpm db:seed && pnpm build",
   "postStartCommand": "nohup pnpm start > /tmp/flowless.log 2>&1 &",
   "customizations": {
     "vscode": {
